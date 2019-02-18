@@ -1,0 +1,12 @@
+version: "3.0"
+services:
+
+  coinr:
+    build: "."
+    restart: "always"
+    ports:
+      - "3838:3838"
+    volumes:
+      - "./etc/shiny-server.conf:/etc/shiny-server/shiny-server.conf"
+      - "./log:/var/log/shiny-server"
+      - "./app:/srv/shiny-server/app"
