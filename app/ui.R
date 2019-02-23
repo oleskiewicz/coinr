@@ -11,12 +11,13 @@ shinyUI(dashboardPage(
       menuItem("Historical rates", tabName = "history", icon = icon("calendar")),
       menuItem("Histogram", tabName = "histogram"),
       menuItem("Portfolio", tabName = "portfolio", icon = icon("money")),
-      menuItem("Source", tabName = "github", icon = icon("code"))
+      menuItem("Source", href = "//github.com/oleskiewicz/coinr", icon = icon("code"))
     )
   ),
 
   dashboardBody(
     tabItems(
+
       tabItem(
         tabName = "home",
         h2("Home")
@@ -51,6 +52,7 @@ shinyUI(dashboardPage(
         tabName = "portfolio",
         h2("Portfolio")
       )
+
     )
   )
 ))
