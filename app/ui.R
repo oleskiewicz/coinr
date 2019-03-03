@@ -1,4 +1,7 @@
+library(dplyr)
 library(dygraphs)
+library(ggplot2)
+library(jsonlite)
 library(shiny)
 library(shinydashboard)
 
@@ -8,8 +11,8 @@ shinyUI(dashboardPage(
 
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Historical rates", tabName = "history", icon = icon("calendar")),
       menuItem("Portfolio", tabName = "portfolio", icon = icon("money")),
+      menuItem("Historical rates", tabName = "history", icon = icon("calendar")),
       menuItem("Source", href = "//github.com/oleskiewicz/coinr", icon = icon("code"))
     )
   ),
@@ -17,19 +20,39 @@ shinyUI(dashboardPage(
   dashboardBody(
     tabItems(
       tabItem(
-        tabName = "history",
+        tabName = "portfolio",
 
         fluidRow(
-          valueBoxOutput("minprice"),
-          valueBoxOutput("maxprice")
+          valueBoxOutput("balance", width = 4),
+          box(
+            plotOutput("portfolio.bands", height = "80px"),
+            width = 8
+          )
         ),
 
-        dygraphOutput("btcprice")
+        fluidRow(
+          box(
+            title = "Market cap",
+            plotOutput("portfolio.current")
+          ),
+          box(
+            title = "Balanced",
+            plotOutput("portfolio.balanced")
+          )
+        ),
+
+        fluidRow(dataTableOutput("coins"))
       ),
 
       tabItem(
-        tabName = "portfolio",
-        h2("Portfolio")
+        tabName = "history",
+
+        fluidRow(
+          valueBoxOutput("minprice", width=6),
+          valueBoxOutput("maxprice", width=6)
+        ),
+
+        fluidRow(dygraphOutput("btcprice"))
       )
     )
   )
