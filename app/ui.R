@@ -1,3 +1,4 @@
+library(dygraphs)
 library(shiny)
 library(shinydashboard)
 
